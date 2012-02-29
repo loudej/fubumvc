@@ -1,12 +1,13 @@
 using System;
 using System.IO;
 using System.Web;
+using FubuCore;
 using FubuCore.Util;
 using FubuMVC.Core.Runtime;
 using FubuMVC.Core.Urls;
 using FubuMVC.Core.View;
 using HtmlTags;
-using Microsoft.Practices.ServiceLocation;
+
 using Spark;
 using System.Collections.Generic;
 

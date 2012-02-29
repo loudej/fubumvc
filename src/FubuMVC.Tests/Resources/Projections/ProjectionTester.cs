@@ -4,7 +4,7 @@ using FubuMVC.Core.Resources.Media;
 using FubuMVC.Core.Resources.Media.Projections;
 using FubuMVC.Core.Resources.Media.Xml;
 using FubuTestingSupport;
-using Microsoft.Practices.ServiceLocation;
+
 using NUnit.Framework;
 using Rhino.Mocks;
 
