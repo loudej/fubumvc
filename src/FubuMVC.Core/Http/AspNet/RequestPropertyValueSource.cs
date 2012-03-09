@@ -84,17 +84,17 @@ namespace FubuMVC.Core.Http.AspNet
 
         public bool Has(string key)
         {
-            throw new NotImplementedException();
+            return _systemProperties.Any(x => x.Name == key);
         }
 
         public object Get(string key)
         {
-            throw new NotImplementedException();
+            return GetRequestProperty(_request, key);
         }
 
         public bool HasChild(string key)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public IValueSource GetChild(string key)
@@ -104,22 +104,30 @@ namespace FubuMVC.Core.Http.AspNet
 
         public IEnumerable<IValueSource> GetChildren(string key)
         {
-            throw new NotImplementedException();
+            return Enumerable.Empty<IValueSource>();
         }
 
         public void WriteReport(IValueReport report)
         {
-            throw new NotImplementedException();
+            _systemProperties.Each(prop => report.Value(prop.Name, Get(prop.Name)));
         }
 
         public bool Value(string key, Action<BindingValue> callback)
         {
-            throw new NotImplementedException();
+            if (!Has(key)) return false;
+
+            callback(new BindingValue{
+                RawKey = key,
+                RawValue = Get(key),
+                Source = Provenance
+            });
+
+            return true;
         }
 
         public string Provenance
         {
-            get { throw new NotImplementedException(); }
+            get { return RequestDataSource.RequestProperty.ToString(); }
         }
 
         private static object GetRequestProperty(HttpRequestBase request, string key)
