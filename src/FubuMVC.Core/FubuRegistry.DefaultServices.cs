@@ -16,6 +16,7 @@ using FubuMVC.Core.Packaging;
 using FubuMVC.Core.Registration;
 using FubuMVC.Core.Registration.DSL;
 using FubuMVC.Core.Registration.Nodes;
+using FubuMVC.Core.Registration.ObjectGraph;
 using FubuMVC.Core.Registration.Querying;
 using FubuMVC.Core.Resources.Etags;
 using FubuMVC.Core.Resources.Media;
@@ -50,7 +51,7 @@ namespace FubuMVC.Core
         MediaExpression Media { get; }
         DiagnosticLevel DiagnosticLevel { get; }
         string Name { get; }
-        void ResolveTypes(Action<TypeResolver> configure);
+
         void UsingObserver(IConfigurationObserver observer);
         void Services(Action<IServiceRegistry> configure);
 
@@ -143,7 +144,7 @@ namespace FubuMVC.Core
 
             graph.Services.AddService<IModelBinder, FubuTupleBinder>();
             graph.Services.AddService<IModelBinder>(new CurrentMimeTypeModelBinder());
-            graph.Services.AddService<IModelBinder>(typeof(ResourcePathBinder));
+            graph.Services.AddService<IModelBinder, ResourcePathBinder>();
 
             graph.Services.SetServiceIfNone<ISetterBinder, SetterBinder>();
 
@@ -194,7 +195,7 @@ namespace FubuMVC.Core
 
             graph.Services.SetServiceIfNone<ISmartRequest, FubuSmartRequest>();
 
-            graph.Services.SetServiceIfNone(new DiagnosticsIndicator());
+            graph.Services.SetServiceIfNone(typeof(DiagnosticsIndicator) ,ObjectDef.ForValue(new DiagnosticsIndicator()));
 
 
             graph.Services.AddService<IFormatter, JsonFormatter>();
@@ -207,7 +208,7 @@ namespace FubuMVC.Core
             graph.Services.SetServiceIfNone<IPageActivator, PageActivator>();
 
             graph.Services.SetServiceIfNone<IPackageFiles, PackageFilesCache>();
-            graph.Services.AddService<IActivator>(typeof (PackageFileActivator));
+            graph.Services.AddService<IActivator, PackageFileActivator>();
 
             graph.Services.SetServiceIfNone<IBindingLogger, NulloBindingLogger>();
 

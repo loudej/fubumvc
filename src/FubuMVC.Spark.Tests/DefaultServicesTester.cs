@@ -16,13 +16,15 @@ namespace FubuMVC.Spark.Tests
     [TestFixture]
     public class DefaultServicesTester : InteractionContext<SparkEngine>
     {
-        private IServiceRegistry _services;
+        private ServiceGraph _services;
 
         protected override void beforeEach()
         {
             var registry = new FubuRegistry();
             ClassUnderTest.As<IFubuRegistryExtension>().Configure(registry);
             _services = registry.BuildLightGraph().Services;
+
+            
         }
 
         [Test]
