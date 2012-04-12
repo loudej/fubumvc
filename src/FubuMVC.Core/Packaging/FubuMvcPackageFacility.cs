@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Hosting;
 using Bottles;
-using Bottles.PackageLoaders;
+using Bottles.BottleLoaders;
 using FubuCore;
 using FubuMVC.Core.Packaging.VirtualPaths;
 
 namespace FubuMVC.Core.Packaging
 {
-    public class FubuMvcPackageFacility : PackageFacility
+    public class FubuMvcPackageFacility : BottleFacility
     {
         public static readonly string FubuPackagesFolder = "fubu-packages";
         public static readonly string FubuContentFolder = "fubu-content";
@@ -21,7 +21,7 @@ namespace FubuMVC.Core.Packaging
             if (applicationPath.IsNotEmpty())
             {
                 // Development mode
-                Loader(new LinkedFolderPackageLoader(GetApplicationPath(), folder => folder));
+                Loader(new LinkedFolderBottleLoader(GetApplicationPath(), folder => folder));
 
                 // Production mode with zip files and standalone assemblies (e.g., Spark.Web.FubuMVC)
                 Loader(new ZipFilePackageLoader());

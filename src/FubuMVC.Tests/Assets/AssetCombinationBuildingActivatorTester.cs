@@ -41,7 +41,7 @@ namespace FubuMVC.Tests.Assets
             theGraph.AddToCombination("combo2", "a.js");
             theGraph.AddToCombination("combo2", "b.js");
 
-            ClassUnderTest.Activate(new IPackageInfo[0], MockFor<IPackageLog>());
+            ClassUnderTest.Activate(new IBottleInfo[0], MockFor<IBottleLog>());
         }
 
         [Test]
@@ -164,19 +164,19 @@ namespace FubuMVC.Tests.Assets
         public void should_trace_the_discovery_of_an_asset_policy()
         {
             var traceMessage = "Registering {0} as an IAssetPolicy";
-            MockFor<IPackageLog>().AssertWasCalled(x => x.Trace(traceMessage, typeof(FakeAssetPolicy1).FullName));
+            MockFor<IBottleLog>().AssertWasCalled(x => x.Trace(traceMessage, typeof(FakeAssetPolicy1).FullName));
         }
 
         [Test]
         public void should_trace_the_discovery_of_a_combination_policy()
         {
-            MockFor<IPackageLog>().AssertWasCalled(x => x.Trace("Registering {0} as an ICombinationPolicy",typeof (CombineAllScriptFiles).FullName ));
+            MockFor<IBottleLog>().AssertWasCalled(x => x.Trace("Registering {0} as an ICombinationPolicy",typeof (CombineAllScriptFiles).FullName ));
         }
     }
 
     public class FakeAssetPolicy1 : IAssetPolicy
     {
-        public void Apply(IPackageLog log, IAssetPipeline pipeline, AssetGraph graph)
+        public void Apply(IBottleLog log, IAssetPipeline pipeline, AssetGraph graph)
         {
             throw new NotImplementedException();
         }
@@ -184,7 +184,7 @@ namespace FubuMVC.Tests.Assets
 
     public class FakeAssetPolicy2 : IAssetPolicy
     {
-        public void Apply(IPackageLog log, IAssetPipeline pipeline, AssetGraph graph)
+        public void Apply(IBottleLog log, IAssetPipeline pipeline, AssetGraph graph)
         {
             throw new NotImplementedException();
         }
@@ -206,7 +206,7 @@ namespace FubuMVC.Tests.Assets
 
             theContextIs();
 
-            ClassUnderTest.Activate(new IPackageInfo[0], MockFor<IPackageLog>());
+            ClassUnderTest.Activate(new IBottleInfo[0], MockFor<IBottleLog>());
         }
 
         protected abstract void theContextIs();

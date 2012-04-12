@@ -9,7 +9,7 @@ namespace FubuMVC.Core
     {
         public virtual void Dispose() {}
 
-        public IEnumerable<IInstaller> StartUp(IPackageLog log)
+        public IEnumerable<IInstaller> StartUp(IBottleLog log)
         {
             var application = createApplication();            
             application.Bootstrap();

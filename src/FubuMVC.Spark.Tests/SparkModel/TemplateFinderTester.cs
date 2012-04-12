@@ -16,8 +16,8 @@ namespace FubuMVC.Spark.Tests.SparkModel
     {
         private readonly string _templatePath;
 
-        private PackageInfo _pak1;
-        private PackageInfo _pak2;
+        private BottleInfo _pak1;
+        private BottleInfo _pak2;
 
         private string _pak1Path;
         private string _pak2Path;
@@ -31,16 +31,16 @@ namespace FubuMVC.Spark.Tests.SparkModel
         {
             Services.Inject<IFileScanner>(new FileScanner());
 
-            _pak1 = new PackageInfo("Pak1");
-            _pak2 = new PackageInfo("Pak2");
+            _pak1 = new BottleInfo("Pak1");
+            _pak2 = new BottleInfo("Pak2");
 
             _pak1Path = Path.Combine("Templates", "Pak1");
             _pak2Path = Path.Combine("Templates", "Package2");
 
-            Services.InjectArray<IPackageInfo>(new[] { _pak1, _pak2 });
+            Services.InjectArray<IBottleInfo>(new[] { _pak1, _pak2 });
 
-            _pak1.RegisterFolder(BottleFiles.WebContentFolder, _pak1Path);
-            _pak2.RegisterFolder(BottleFiles.WebContentFolder, _pak2Path);
+            _pak1.RegisterFolder(CommonBottleFiles.WebContentFolder, _pak1Path);
+            _pak2.RegisterFolder(CommonBottleFiles.WebContentFolder, _pak2Path);
 
             ClassUnderTest.HostPath = _templatePath;
 

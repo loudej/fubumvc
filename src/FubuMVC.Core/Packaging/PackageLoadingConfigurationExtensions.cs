@@ -4,22 +4,22 @@ namespace FubuMVC.Core.Packaging
 {
     public static class PackageLoadingConfigurationExtensions
     {
-        public static void Bootstrapper<T>(this IPackageFacility configuration) where T : IBootstrapper, new()
+        public static void Bootstrapper<T>(this IBottleFacility configuration) where T : IBootstrapper, new()
         {
             configuration.Bootstrapper(new T());
         }
 
-        public static void Loader<T>(this IPackageFacility configuration) where T : IPackageLoader, new()
+        public static void Loader<T>(this IBottleFacility configuration) where T : IBottleLoader, new()
         {
             configuration.Loader(new T());
         }
 
-        public static void Activator<T>(this IPackageFacility configuration) where T : IActivator, new()
+        public static void Activator<T>(this IBottleFacility configuration) where T : IActivator, new()
         {
             configuration.Activator(new T());
         }
 
-        public static void Facility<T>(this IPackageFacility configuration) where T : PackageFacility, new()
+        public static void Facility<T>(this IBottleFacility configuration) where T : BottleFacility, new()
         {
             configuration.Facility(new T());
         }

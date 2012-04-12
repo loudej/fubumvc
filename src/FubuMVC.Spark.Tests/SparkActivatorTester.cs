@@ -27,7 +27,7 @@ namespace FubuMVC.Spark.Tests
             _settings = _viewEngine.Settings;
 
             Services.Inject<ISparkViewEngine>(_viewEngine);
-            ClassUnderTest.Activate(Enumerable.Empty<IPackageInfo>(), MockFor<IPackageLog>());
+            ClassUnderTest.Activate(Enumerable.Empty<IBottleInfo>(), MockFor<IBottleLog>());
         }
 
         [Test]

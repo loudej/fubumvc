@@ -17,13 +17,13 @@ namespace FubuMVC.Core.View.Model
     public class TemplateFinder<T> : ITemplateFinder<T> where T : ITemplateFile, new()
     {
         private readonly IFileScanner _fileScanner;
-        private readonly IEnumerable<IPackageInfo> _packages;
+        private readonly IEnumerable<IBottleInfo> _packages;
         private CompositeAction<ScanRequest> _requestConfig;
         private CompositeAction<ScanRequest> _hostExcludes;
         private string _hostPath;
         
-        public TemplateFinder() : this(new FileScanner(), PackageRegistry.Packages) { }
-        public TemplateFinder(IFileScanner fileScanner, IEnumerable<IPackageInfo> packages)
+        public TemplateFinder() : this(new FileScanner(), BottlesRegistry.Bottles) { }
+        public TemplateFinder(IFileScanner fileScanner, IEnumerable<IBottleInfo> packages)
         {
             _fileScanner = fileScanner;
             _packages = packages;
@@ -89,13 +89,13 @@ namespace FubuMVC.Core.View.Model
             _hostExcludes += r => r.ExcludeDirectory(path);
         }
 
-        private static IEnumerable<TemplateRoot> packageRoots(IEnumerable<IPackageInfo> packages)
+        private static IEnumerable<TemplateRoot> packageRoots(IEnumerable<IBottleInfo> packages)
         {
             var packageRoots = new List<TemplateRoot>();
             foreach (var package in packages)
             {
                 var pack = package;
-                package.ForFolder(BottleFiles.WebContentFolder, path =>
+                package.ForFolder(CommonBottleFiles.WebContentFolder, path =>
                 {
                     var root = new TemplateRoot
                     {

@@ -163,7 +163,7 @@ namespace FubuMVC.Tests.Assets
             assetGraph.Dependency("a.js", "c.js");
             assetGraph.Dependency("d.js", "e.js");
             assetGraph.Dependency("d.js", "b.js");
-            assetGraph.CompileDependencies(new PackageLog());
+            assetGraph.CompileDependencies(new BottleLog());
             Services.Inject<IAssetDependencyFinder>(new AssetDependencyFinderCache(assetGraph));
         }
 

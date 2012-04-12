@@ -7,7 +7,7 @@ namespace FubuMVC.Core.Assets
 {
     public interface IAssetPolicy
     {
-        void Apply(IPackageLog log, IAssetPipeline pipeline, AssetGraph graph);
+        void Apply(IBottleLog log, IAssetPipeline pipeline, AssetGraph graph);
     }
 
     public class AssetPolicyActivator : IActivator
@@ -23,7 +23,7 @@ namespace FubuMVC.Core.Assets
             _graph = graph;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             _policies.Each(p =>
             {

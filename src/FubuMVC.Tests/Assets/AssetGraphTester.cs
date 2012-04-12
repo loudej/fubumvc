@@ -118,7 +118,7 @@ namespace FubuMVC.Tests.Assets
         {
             if (!_compiled)
             {
-                theGraph.CompileDependencies(new PackageLog());
+                theGraph.CompileDependencies(new BottleLog());
                 _compiled = true;
             }
 
@@ -175,7 +175,7 @@ namespace FubuMVC.Tests.Assets
         {
             theGraph.Dependency("a", "b");
             theGraph.Dependency("a", "c");
-            theGraph.CompileDependencies(new PackageLog());
+            theGraph.CompileDependencies(new BottleLog());
 
             ScriptNamesFor("a").ShouldHaveTheSameElementsAs("b", "c", "a");
         }
@@ -208,7 +208,7 @@ namespace FubuMVC.Tests.Assets
             theGraph.Extension("D", "A");
             theGraph.Extension("F", "B");
 
-            theGraph.CompileDependencies(new PackageLog());
+            theGraph.CompileDependencies(new BottleLog());
 
             var a = theGraph.FileDependencyFor("A");
             var b = theGraph.FileDependencyFor("B");
@@ -236,7 +236,7 @@ namespace FubuMVC.Tests.Assets
         public void preceeding()
         {
             theGraph.Preceeding("before-b", "b");
-            theGraph.CompileDependencies(new PackageLog());
+            theGraph.CompileDependencies(new BottleLog());
 
             theGraph.FileDependencyFor("before-b").MustBeAfter(theGraph.FileDependencyFor("b")).ShouldBeFalse();
             theGraph.FileDependencyFor("b").MustBeAfter(theGraph.FileDependencyFor("before-b")).ShouldBeTrue();
@@ -265,7 +265,7 @@ namespace FubuMVC.Tests.Assets
             reader.ReadLine("C-1 extends C");
             reader.ReadLine("crud includes crudForm.js,validation.js");
             reader.ReadLine("A requires crud");
-            graph.CompileDependencies(new PackageLog());
+            graph.CompileDependencies(new BottleLog());
         }
 
         [Test]

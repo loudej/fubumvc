@@ -43,11 +43,11 @@ namespace FubuMVC.Razor.Tests.RazorModel.ViewFolder
             var pathPackage1 = Path.Combine(pathApp, "fubu-packages", "Package1", "WebContent");
             var pathPackage2 = Path.Combine(testRoot, "Package2");
 
-            var packages = new List<IPackageInfo>();
-            var pack1 = new PackageInfo(Package1);
-            var pack2 = new PackageInfo(Package2);
-            pack1.RegisterFolder(BottleFiles.WebContentFolder, pathPackage1);
-            pack2.RegisterFolder(BottleFiles.WebContentFolder, pathPackage2);
+            var packages = new List<IBottleInfo>();
+            var pack1 = new BottleInfo(Package1);
+            var pack2 = new BottleInfo(Package2);
+            pack1.RegisterFolder(CommonBottleFiles.WebContentFolder, pathPackage1);
+            pack2.RegisterFolder(CommonBottleFiles.WebContentFolder, pathPackage2);
             packages.Add(pack1);
             packages.Add(pack2);
 

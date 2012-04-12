@@ -52,7 +52,7 @@ namespace Fubu
 
             input.AppendIncludes(manifest.ContentFileSet);
 
-            new FileSystem().PersistToFile(manifest, folder, PackageManifest.FILE);
+            new FileSystem().PersistToFile(manifest, folder, BottleManifest.FILE);
 
             return true;
         }

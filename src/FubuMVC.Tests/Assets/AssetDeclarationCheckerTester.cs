@@ -37,7 +37,7 @@ namespace FubuMVC.Tests.Assets
 
             ClassUnderTest.VerifyFileDependency(theAssetName);
 
-            MockFor<IPackageLog>().AssertWasNotCalled(x => x.MarkFailure(""), x => x.IgnoreArguments());
+            MockFor<IBottleLog>().AssertWasNotCalled(x => x.MarkFailure(""), x => x.IgnoreArguments());
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace FubuMVC.Tests.Assets
             var expectedMessage = AssetDeclarationChecker.GetErrorMessage(theAssetName, MockFor<AssetLogsCache>());
 
 
-            MockFor<IPackageLog>().AssertWasCalled(x => x.MarkFailure(expectedMessage));
+            MockFor<IBottleLog>().AssertWasCalled(x => x.MarkFailure(expectedMessage));
         }
     }
 }

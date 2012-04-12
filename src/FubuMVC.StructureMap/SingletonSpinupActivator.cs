@@ -16,7 +16,7 @@ namespace FubuMVC.StructureMap
             _container = container;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             // Remove this method when the issue is closed 
             // http://github.com/structuremap/structuremap/issues#issue/3

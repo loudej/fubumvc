@@ -8,7 +8,7 @@ namespace FubuMVC.Core.Packaging.VirtualPaths
 {
     public class VirtualPathProviderActivator : IActivator
     {
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> bottles, IBottleLog log)
         {
             if (!HostingEnvironment.IsHosted)
             {
@@ -19,9 +19,9 @@ namespace FubuMVC.Core.Packaging.VirtualPaths
 
             HostingEnvironment.RegisterVirtualPathProvider(provider);
 
-            packages.Each(x =>
+            bottles.Each(x =>
             {
-                x.ForFolder(BottleFiles.WebContentFolder, directory =>  
+                x.ForFolder(CommonBottleFiles.WebContentFolder, directory =>  
                 {
                     log.Trace("Adding the bottle directory {0} to the virtual directory provider", directory);
                     provider.RegisterContentDirectory(directory);
@@ -32,7 +32,7 @@ namespace FubuMVC.Core.Packaging.VirtualPaths
 
         public override string ToString()
         {
-            return "Adding package web content folders to the virtual path provider ({0})".ToFormat(GetType().Name);
+            return "Adding bottle web content folders to the virtual path provider ({0})".ToFormat(GetType().Name);
         }
     }
 }

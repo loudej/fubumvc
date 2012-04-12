@@ -23,7 +23,7 @@ namespace FubuMVC.Spark
 			_engine = engine;
 		}
 
-		public void Activate (IEnumerable<IPackageInfo> packages, IPackageLog log)
+		public void Activate (IEnumerable<IBottleInfo> packages, IBottleLog log)
 		{
             log.Trace("Running {0}".ToFormat(GetType().Name));
 			
@@ -32,7 +32,7 @@ namespace FubuMVC.Spark
 		}
 
         // We need to get these settings from DSL and defaults
-		private void configureSparkSettings (IPackageLog log)
+		private void configureSparkSettings (IBottleLog log)
 		{
 			var settings = (SparkSettings)_engine.Settings;
 
@@ -53,7 +53,7 @@ namespace FubuMVC.Spark
             settings.UseNamespaces.Each(x => log.Trace("  - {0}".ToFormat(x)));
 		}
 
-        private void setEngineDependencies(IPackageLog log)
+        private void setEngineDependencies(IBottleLog log)
         {
             var engine = (SparkViewEngine) _engine;
 

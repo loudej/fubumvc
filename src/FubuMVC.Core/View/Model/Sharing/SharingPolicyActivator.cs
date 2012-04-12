@@ -20,14 +20,14 @@ namespace FubuMVC.Core.View.Model.Sharing
             Diagnostics = new SharingRegistrationDiagnostics(_graph, _logs);
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             ApplyPolicies(log);
             RegisterAppGlobal(log);            
             CompileDependencies(packages, log);
         }
 
-        public void ApplyPolicies(IPackageLog log)
+        public void ApplyPolicies(IBottleLog log)
         {
             _policies.Each(p =>
             {
@@ -40,7 +40,7 @@ namespace FubuMVC.Core.View.Model.Sharing
             });            
         }
 
-        public void CompileDependencies(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void CompileDependencies(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             var provenances = packages.Select(p => p.Name).Union(new[] { TemplateConstants.HostOrigin }).ToArray();
             
@@ -50,7 +50,7 @@ namespace FubuMVC.Core.View.Model.Sharing
         }
 
         // I would rather have this as a ISharingPolicy, but don't know how to ensure it is applied last.
-        public void RegisterAppGlobal(IPackageLog log)
+        public void RegisterAppGlobal(IBottleLog log)
         {
             log.Trace("Registering application as global sharing.");
             

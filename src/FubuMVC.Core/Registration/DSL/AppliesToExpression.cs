@@ -19,7 +19,7 @@ namespace FubuMVC.Core.Registration.DSL
         /// </summary>
         public AppliesToExpression ToAllPackageAssemblies()
         {
-            _pool.AddSource(() => PackageRegistry.PackageAssemblies);
+            _pool.AddSource(() => BottlesRegistry.PackageAssemblies);
             return this;
         }
 

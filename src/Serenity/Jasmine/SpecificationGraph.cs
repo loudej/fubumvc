@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Bottles.PackageLoaders.Assemblies;
+using Bottles.BottleLoaders.Assemblies;
 using FubuCore;
 using FubuCore.Util;
 using FubuMVC.Core.Assets.Files;
@@ -87,7 +87,7 @@ namespace Serenity.Jasmine
         {
             if (package.PackageName == "application") return false;
 
-            if (package.PackageName == AssemblyPackageInfo.CreateFor(typeof (SpecificationGraph).Assembly).Name)
+            if (package.PackageName == AssemblyBottleInfo.CreateFor(typeof (SpecificationGraph).Assembly).Name)
                 return false;
 
             return true;

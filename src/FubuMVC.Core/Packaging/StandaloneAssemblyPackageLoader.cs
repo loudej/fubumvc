@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Bottles;
 using Bottles.Diagnostics;
-using Bottles.PackageLoaders.Assemblies;
+using Bottles.BottleLoaders.Assemblies;
 using FubuCore;
 
 namespace FubuMVC.Core.Packaging
 {
-	public class StandaloneAssemblyPackageLoader : IPackageLoader
+	public class StandaloneAssemblyPackageLoader : IBottleLoader
 	{
 		private readonly IStandaloneAssemblyFinder _assemblyFinder;
 
@@ -16,10 +16,10 @@ namespace FubuMVC.Core.Packaging
 			_assemblyFinder = assemblyFinder;
 		}
 
-		public IEnumerable<IPackageInfo> Load(IPackageLog log)
+		public IEnumerable<IBottleInfo> Load(IBottleLog log)
 		{
 			var assemblies = _assemblyFinder.FindAssemblies(FubuMvcPackageFacility.GetApplicationPath());
-            return assemblies.Select(assembly => AssemblyPackageInfo.CreateFor(assembly).As<IPackageInfo>());
+            return assemblies.Select(assembly => AssemblyBottleInfo.CreateFor(assembly).As<IBottleInfo>());
 		}
 	}
 

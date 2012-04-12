@@ -17,13 +17,13 @@ namespace FubuMVC.Core.Assets
             _pipeline = new RecordingAssetFileRegistrator(pipeline, assetLogsCache);
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             var builder = new AssetPipelineBuilder(new FileSystem(), _pipeline, log);
             findDirectories(packages).Each(builder.LoadFiles);
         }
 
-        private static IEnumerable<PackageAssetDirectory> findDirectories(IEnumerable<IPackageInfo> packages)
+        private static IEnumerable<PackageAssetDirectory> findDirectories(IEnumerable<IBottleInfo> packages)
         {
             yield return new PackageAssetDirectory(){
                 Directory = FubuMvcPackageFacility.GetApplicationPath(),
@@ -33,7 +33,7 @@ namespace FubuMVC.Core.Assets
             foreach (var pak in packages)
             {
                 string directory = null;
-                pak.ForFolder(BottleFiles.WebContentFolder, dir =>
+                pak.ForFolder(CommonBottleFiles.WebContentFolder, dir =>
                 {
                     directory = dir; 
                 });

@@ -22,7 +22,7 @@ namespace FubuMVC.Core.Assets
         }
 
         // No automated tests for this.
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             var checker = new AssetDeclarationChecker(_pipeline, log, _assetLogs);
             _graph.AllDependencies().Each(x => checker.VerifyFileDependency(x.Name));

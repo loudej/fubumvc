@@ -35,7 +35,7 @@ namespace FubuMVC.Tests.Packaging
             thePackage.ForFolder("Data", action);
             action.AssertWasNotCalled(x => x.Invoke("content-package"));
 
-            thePackage.ForFolder(BottleFiles.WebContentFolder, action);
+            thePackage.ForFolder(CommonBottleFiles.WebContentFolder, action);
             action.AssertWasCalled(x => x.Invoke("content-package"));
         }
     }

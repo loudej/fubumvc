@@ -20,9 +20,9 @@ namespace FubuMVC.Tests.Assets
         private string packageDirectory;
         private IFileSystem fileSystem = new FileSystem();
         private string _packageName;
-        private System.Collections.Generic.List<IPackageInfo> _packages;
+        private System.Collections.Generic.List<IBottleInfo> _packages;
         private AssetPipeline thePipeline;
-        private PackageLog theLog;
+        private BottleLog theLog;
 
         private void startPackage(string packageName)
         {
@@ -31,7 +31,7 @@ namespace FubuMVC.Tests.Assets
 
             var directory = ".".AppendPath(packageName);
             var package = new StubPackage(packageName);
-            package.RegisterFolder(BottleFiles.WebContentFolder, directory);
+            package.RegisterFolder(CommonBottleFiles.WebContentFolder, directory);
             _packages.Add(package);
 
             packageDirectory = directory;
@@ -55,7 +55,7 @@ namespace FubuMVC.Tests.Assets
         public void SetUp()
         {
             packageDirectory = ".".ToFullPath();
-            _packages = new List<IPackageInfo>();
+            _packages = new List<IBottleInfo>();
 
             AssetFolderIs = AssetFolder.scripts;
             writeFile("a.js");
@@ -85,7 +85,7 @@ namespace FubuMVC.Tests.Assets
 
             thePipeline = new AssetPipeline();
             var activator = new AssetPipelineBuilderActivator(thePipeline,new AssetLogsCache());
-            theLog = new PackageLog();
+            theLog = new BottleLog();
             activator.Activate(_packages, theLog);
 
             Debug.WriteLine(theLog.FullTraceText());

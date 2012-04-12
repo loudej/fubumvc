@@ -14,8 +14,8 @@ namespace Fubu
 
         public static int Main(string[] args)
         {
-            BottleFiles.ContentFolder = FubuMvcPackageFacility.FubuContentFolder;
-            BottleFiles.PackagesFolder = FileSystem.Combine("bin", FubuMvcPackageFacility.FubuPackagesFolder);
+            CommonBottleFiles.ContentFolder = FubuMvcPackageFacility.FubuContentFolder;
+            CommonBottleFiles.PackagesFolder = FileSystem.Combine("bin", FubuMvcPackageFacility.FubuPackagesFolder);
 
             try
             {

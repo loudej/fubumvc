@@ -17,14 +17,14 @@ namespace FubuMVC.Core.Localization
             _facility = facility;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             var list = new List<string>();
             log.Trace("Setting up the {0} with directories", typeof(XmlDirectoryLocalizationStorage).Name);
             
             list.Add(FubuMvcPackageFacility.GetApplicationPath());
 
-            packages.Each(pak => pak.ForFolder(BottleFiles.WebContentFolder, list.Add));
+            packages.Each(pak => pak.ForFolder(CommonBottleFiles.WebContentFolder, list.Add));
 
             var storage = new XmlDirectoryLocalizationStorage(list);
 

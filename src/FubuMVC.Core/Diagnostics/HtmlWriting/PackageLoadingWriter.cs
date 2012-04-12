@@ -24,7 +24,7 @@ namespace FubuMVC.Core.Diagnostics.HtmlWriting
         [FubuDiagnostics("Package Loading and Bootstrapping")]
         public HtmlDocument FullLog()
         {
-            var table = LoggingSessionWriter.Write(PackageRegistry.Diagnostics);
+            var table = LoggingSessionWriter.Write(BottlesRegistry.Diagnostics);
             var document = DiagnosticHtml.BuildDocument(_urls, "Full Package Loading Log", table);
 
             return document;

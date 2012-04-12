@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bottles">
-      <HintPath>..\packages\Bottles.0.9.1.226\lib\Bottles.dll</HintPath>
+      <HintPath>..\packages\Bottles.0.9.1.224\lib\Bottles.dll</HintPath>
     </Reference>
     <Reference Include="FubuCore">
       <HintPath>..\packages\FubuCore.0.9.8.130\lib\FubuCore.dll</HintPath>
@@ -188,7 +188,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349C5851-65DF-11DA-9384-00065B846F21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>false</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>18895</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

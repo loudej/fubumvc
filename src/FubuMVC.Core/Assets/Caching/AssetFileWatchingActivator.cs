@@ -13,7 +13,7 @@ namespace FubuMVC.Core.Assets.Caching
             _watcher = watcher;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             _watcher.StartWatchingAll();
         }

@@ -15,10 +15,10 @@ namespace FubuMVC.Core.Assets
 
 
         private readonly IAssetPipeline _pipeline;
-        private readonly IPackageLog _log;
+        private readonly IBottleLog _log;
         private readonly AssetLogsCache _assetLogs;
 
-        public AssetDeclarationChecker(IAssetPipeline pipeline, IPackageLog log, AssetLogsCache assetLogs)
+        public AssetDeclarationChecker(IAssetPipeline pipeline, IBottleLog log, AssetLogsCache assetLogs)
         {
             _pipeline = pipeline;
             _log = log;

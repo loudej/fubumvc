@@ -15,7 +15,7 @@ namespace Serenity.Jasmine
         void AddContentFolder(string contentFolder);
     }
 
-    public class SerenityJasmineApplication : IApplicationSource, IPackageLoader, ISerenityJasmineApplication
+    public class SerenityJasmineApplication : IApplicationSource, IBottleLoader, ISerenityJasmineApplication
     {
         private readonly IList<string> _contentFolders = new List<string>();
 
@@ -36,7 +36,7 @@ namespace Serenity.Jasmine
             get { return "Serenity Jasmine Runner"; }
         }
 
-        public IEnumerable<IPackageInfo> Load(IPackageLog log)
+        public IEnumerable<IBottleInfo> Load(IBottleLog log)
         {
             return _contentFolders.Select(x =>
             {

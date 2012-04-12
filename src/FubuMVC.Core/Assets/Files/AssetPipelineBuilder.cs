@@ -25,9 +25,9 @@ namespace FubuMVC.Core.Assets.Files
 
         private readonly IFileSystem _system;
         private readonly IAssetFileRegistration _registration;
-        private readonly IPackageLog _log;
+        private readonly IBottleLog _log;
 
-        public AssetPipelineBuilder(IFileSystem system, IAssetFileRegistration registration, IPackageLog log)
+        public AssetPipelineBuilder(IFileSystem system, IAssetFileRegistration registration, IBottleLog log)
         {
             _system = system;
             _registration = registration;

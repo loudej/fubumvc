@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Bottles.Diagnostics;
 using Bottles.Environment;
-using FubuMVC.Core.Packaging;
 
 namespace FubuTestApplication
 {
@@ -13,7 +12,7 @@ namespace FubuTestApplication
             
         }
 
-        public IEnumerable<IInstaller> StartUp(IPackageLog log)
+        public IEnumerable<IInstaller> StartUp(IBottleLog log)
         {
             throw new ApplicationException("I blew up!");
         }
@@ -26,7 +25,7 @@ namespace FubuTestApplication
 
         }
 
-        public IEnumerable<IInstaller> StartUp(IPackageLog log)
+        public IEnumerable<IInstaller> StartUp(IBottleLog log)
         {
             log.MarkFailure("I found a problem in StartUp");
             return new IInstaller[0];
@@ -45,7 +44,7 @@ namespace FubuTestApplication
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IInstaller> StartUp(IPackageLog log)
+        public IEnumerable<IInstaller> StartUp(IBottleLog log)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +56,7 @@ namespace FubuTestApplication
         {
         }
 
-        public IEnumerable<IInstaller> StartUp(IPackageLog log)
+        public IEnumerable<IInstaller> StartUp(IBottleLog log)
         {
             log.Trace("I started up with all good installers");
 
@@ -75,16 +74,16 @@ namespace FubuTestApplication
             
         }
 
-        public IEnumerable<IInstaller> StartUp(IPackageLog log)
+        public IEnumerable<IInstaller> StartUp(IBottleLog log)
         {
             yield return this;
         }
 
-        public virtual void Install(IPackageLog log)
+        public virtual void Install(IBottleLog log)
         {
         }
 
-        public virtual void CheckEnvironment(IPackageLog log)
+        public virtual void CheckEnvironment(IBottleLog log)
         {
         }
     }
@@ -92,7 +91,7 @@ namespace FubuTestApplication
 
     public class InstallerThatMarksFailureInLogDuringInstall : StubEnvironment
     {
-        public override void Install(IPackageLog log)
+        public override void Install(IBottleLog log)
         {
             log.MarkFailure("I detected a problem during Install");
         }
@@ -100,7 +99,7 @@ namespace FubuTestApplication
 
     public class InstallerThatMarksFailureInLogDuringCheckEnvironment : StubEnvironment
     {
-        public override void CheckEnvironment(IPackageLog log)
+        public override void CheckEnvironment(IBottleLog log)
         {
             log.MarkFailure("I detected a problem during CheckEnvironment");
         }
@@ -108,7 +107,7 @@ namespace FubuTestApplication
 
     public class InstallerThatBlowsUpInCheckEnvironment : StubEnvironment
     {
-        public override void CheckEnvironment(IPackageLog log)
+        public override void CheckEnvironment(IBottleLog log)
         {
             throw new NotImplementedException("The environment is borked!");
         }
@@ -116,7 +115,7 @@ namespace FubuTestApplication
 
     public class InstallerThatBlowsUpInInstall : StubEnvironment
     {
-        public override void Install(IPackageLog log)
+        public override void Install(IBottleLog log)
         {
             throw new NotImplementedException("You shall not pass");
         }
@@ -124,12 +123,12 @@ namespace FubuTestApplication
 
     public class GoodInstaller1 : IInstaller
     {
-        public void Install(IPackageLog log)
+        public void Install(IBottleLog log)
         {
             log.Trace("All Good 1");
         }
 
-        public void CheckEnvironment(IPackageLog log)
+        public void CheckEnvironment(IBottleLog log)
         {
             log.Trace("All Good 1 -- Env");
         }
@@ -137,12 +136,12 @@ namespace FubuTestApplication
 
     public class GoodInstaller2 : IInstaller
     {
-        public void Install(IPackageLog log)
+        public void Install(IBottleLog log)
         {
             log.Trace("All Good 2");
         }
 
-        public void CheckEnvironment(IPackageLog log)
+        public void CheckEnvironment(IBottleLog log)
         {
             log.Trace("All Good 2 -- Env");
         }
@@ -150,12 +149,12 @@ namespace FubuTestApplication
 
     public class GoodInstaller3 : IInstaller
     {
-        public void Install(IPackageLog log)
+        public void Install(IBottleLog log)
         {
             log.Trace("All Good 3");
         }
 
-        public void CheckEnvironment(IPackageLog log)
+        public void CheckEnvironment(IBottleLog log)
         {
             log.Trace("All Good 3 -- Env");
         }

@@ -38,13 +38,13 @@ namespace Fubu
                 // TODO -- will need to do this for assembly packages as well
 
                 Console.WriteLine("Exploding all the package zip files for the application at " + input.AppFolder);
-                exploder.ExplodeAllZipsAndReturnPackageDirectories(input.AppFolder, new PackageLog());
+                exploder.ExplodeAllZipsAndReturnPackageDirectories(input.AppFolder, new BottleLog());
             }
 
             // TODO -- this doesn't work for anything but fubu
             if (input.RemoveAllFlag)
             {
-                var packageFolder = BottleFiles.GetApplicationPackagesDirectory(input.AppFolder);
+                var packageFolder = CommonBottleFiles.GetApplicationPackagesDirectory(input.AppFolder);
                 Console.WriteLine("Removing all package files and directories from the application at " + packageFolder);
                 new FileSystem().DeleteDirectory(packageFolder);
 
@@ -59,9 +59,9 @@ namespace Fubu
 
 
         //REVIEW: should this be here?
-        public virtual IPackageExploder BuildExploder()
+        public virtual IBottleExploder BuildExploder()
         {
-            return PackageExploder.GetPackageExploder(new FileSystem());
+            return BottleExploder.GetBottleExploder(new FileSystem());
         }
     }
 }

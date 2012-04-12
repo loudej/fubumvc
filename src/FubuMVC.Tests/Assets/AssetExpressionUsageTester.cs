@@ -156,7 +156,7 @@ namespace FubuMVC.Tests.Assets
 crud includes a.js, b.js, c.js
 ");
 
-            graph.CompileDependencies(new PackageLog());
+            graph.CompileDependencies(new BottleLog());
 
             graph.AssetSetFor("crud").AllFileDependencies()
                 .Select(x => x.Name)

@@ -19,7 +19,7 @@ namespace FubuTestApplication
                 .StructureMap(new Container())
                 .Bootstrap();
 
-            PackageRegistry.AssertNoFailures();
+            BottlesRegistry.AssertNoFailures();
         }
     }
 

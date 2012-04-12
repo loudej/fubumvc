@@ -14,7 +14,7 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
     {
         private SharingGraph _graph;
         private SharingConfigActivator _activator;
-        private IPackageLog _packageLog;
+        private IBottleLog _packageLog;
         private IFileSystem _fileSystem;
         private SharingLogsCache _sharingLogs;
 
@@ -25,7 +25,7 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
 
             _graph = new SharingGraph();
             _fileSystem = new FileSystem();
-            _packageLog = new PackageLog();
+            _packageLog = new BottleLog();
             _sharingLogs = new SharingLogsCache();
 
             _activator = new SharingConfigActivator(_graph, _fileSystem, _sharingLogs);

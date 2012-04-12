@@ -16,7 +16,7 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
         private SharingGraph _graph;
         private List<ISharingPolicy> _policies;
         private SharingPolicyActivator _activator;
-        private IPackageLog _packageLog;
+        private IBottleLog _packageLog;
         private SharingLogsCache _sharingLogs;
 
         [SetUp]
@@ -24,7 +24,7 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
         {
             _policies = new List<ISharingPolicy> {MockRepository.GenerateMock<ISharingPolicy>()};
             _graph = new SharingGraph();
-            _packageLog = MockRepository.GenerateMock<IPackageLog>();
+            _packageLog = MockRepository.GenerateMock<IBottleLog>();
             _sharingLogs = new SharingLogsCache();
             _activator = new SharingPolicyActivator(_graph, _sharingLogs, _policies);
         }
@@ -73,10 +73,10 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
         [Test]
         public void compile_dependencies_logs_all_provenances()
         {
-            var packages = new List<IPackageInfo>
+            var packages = new List<IBottleInfo>
             {
-                new PackageInfo("a"), 
-                new PackageInfo("b")
+                new BottleInfo("a"), 
+                new BottleInfo("b")
             };
 
             _activator.CompileDependencies(packages, _packageLog);
@@ -87,10 +87,10 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
         [Test]
         public void compile_dependencies_implicit_adds_host_as_provenance()
         {
-            var packages = new List<IPackageInfo>
+            var packages = new List<IBottleInfo>
             {
-                new PackageInfo("a"), 
-                new PackageInfo("b")
+                new BottleInfo("a"), 
+                new BottleInfo("b")
             };
 
             _graph.Global("x");

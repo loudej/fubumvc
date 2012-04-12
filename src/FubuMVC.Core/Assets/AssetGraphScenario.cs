@@ -91,7 +91,7 @@ namespace FubuMVC.Core.Assets
                 _graph = new AssetGraph();
                 _cache = new Lazy<AssetDependencyFinderCache>(() =>
                 {
-                    _graph.CompileDependencies(new PackageLog());
+                    _graph.CompileDependencies(new BottleLog());
                     return new AssetDependencyFinderCache(_graph);
                 });
 

@@ -13,7 +13,7 @@ namespace FubuMVC.Tests.Assets
     public class MimetypeRegistrationActivatorTester
     {
         private ITransformerPolicy[] thePolicies;
-        private PackageLog theLog;
+        private BottleLog theLog;
 
 
         [TestFixtureSetUp]
@@ -25,9 +25,9 @@ namespace FubuMVC.Tests.Assets
                 new CssTransformerPolicy<ATransformer>(ActionType.Substitution, ".c", ".d")
             };
 
-            theLog = new PackageLog();
+            theLog = new BottleLog();
 
-            new MimetypeRegistrationActivator(thePolicies).Activate(new IPackageInfo[0],theLog);
+            new MimetypeRegistrationActivator(thePolicies).Activate(new IBottleInfo[0],theLog);
 
             
         }

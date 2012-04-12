@@ -21,7 +21,7 @@ namespace FubuMVC.HelloWorld
             // fatal and there will be no YSOD.  This is to help during initial debugging and 
             // troubleshooting package loading. Normally, however, you want a YSOD if there is
             // a bootstrapping failure or a package-loading failure. This next line ensures that.
-            PackageRegistry.AssertNoFailures(); 
+            BottlesRegistry.AssertNoFailures(); 
         }
 
         private static void SetupContainer(ConfigurationExpression x)

@@ -14,7 +14,7 @@ namespace FubuMVC.Spark.Tests.SparkModel.Sharing
             ClassUnderTest.Global("g");
             ClassUnderTest.Dependency("a", "b");
 
-            ClassUnderTest.Apply(MockFor<IPackageLog>(), MockFor<ISharingRegistration>());
+            ClassUnderTest.Apply(MockFor<IBottleLog>(), MockFor<ISharingRegistration>());
         }
 
         [Test]

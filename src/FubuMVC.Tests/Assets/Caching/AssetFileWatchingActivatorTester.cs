@@ -13,7 +13,7 @@ namespace FubuMVC.Tests.Assets.Caching
         [Test]
         public void activate_simply_starts_the_asset_file_watcher_going()
         {
-            ClassUnderTest.Activate(new IPackageInfo[0], new PackageLog());
+            ClassUnderTest.Activate(new IBottleInfo[0], new BottleLog());
 
             MockFor<IAssetFileWatcher>().AssertWasCalled(x => x.StartWatchingAll());
         }

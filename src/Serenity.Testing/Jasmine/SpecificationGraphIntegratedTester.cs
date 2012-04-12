@@ -20,7 +20,7 @@ namespace Serenity.Testing.Jasmine
         public void SetUp()
         {
             thePipeline = new AssetPipeline();
-            var builder = new AssetPipelineBuilder(new FileSystem(), thePipeline, new PackageLog());
+            var builder = new AssetPipelineBuilder(new FileSystem(), thePipeline, new BottleLog());
             builder.LoadFiles(new PackageAssetDirectory{
                 Directory = FileSystem.Combine("..", "..", "Jasmine", "TestPackage2"),
                 PackageName = "Pak2"

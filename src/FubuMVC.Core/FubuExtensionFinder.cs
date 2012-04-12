@@ -11,11 +11,11 @@ namespace FubuMVC.Core
     {
         public static IEnumerable<IFubuRegistryExtension> FindAllExtensions()
         {
-            if (!PackageRegistry.PackageAssemblies.Any()) return new IFubuRegistryExtension[0];
+            if (!BottlesRegistry.PackageAssemblies.Any()) return new IFubuRegistryExtension[0];
 
             var pool = new TypePool(null);
 
-            pool.AddAssemblies(PackageRegistry.PackageAssemblies);
+            pool.AddAssemblies(BottlesRegistry.PackageAssemblies);
 
             // Yeah, it really does have to be this way
             return pool.TypesMatching(

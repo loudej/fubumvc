@@ -178,9 +178,9 @@ namespace Serenity.Jasmine
 
         public void StartWatching(ISpecFileListener listener)
         {
-            PackageRegistry.Packages.Each(pak =>
+            BottlesRegistry.Bottles.Each(pak =>
             {
-                pak.ForFolder(BottleFiles.WebContentFolder, dir =>
+                pak.ForFolder(CommonBottleFiles.WebContentFolder, dir =>
                 {
                     var contentFolder = dir.AppendPath("content");
                     if (_fileSystem.DirectoryExists(contentFolder))

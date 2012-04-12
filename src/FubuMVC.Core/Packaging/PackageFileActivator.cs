@@ -13,11 +13,11 @@ namespace FubuMVC.Core.Packaging
             _files = files;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> bottles, IBottleLog log)
         {
-            packages.Each(pak =>
+            bottles.Each(pak =>
             {
-                pak.ForFolder(BottleFiles.WebContentFolder, dir =>
+                pak.ForFolder(CommonBottleFiles.WebContentFolder, dir =>
                 {
                     log.Trace("Adding directory {0} to PackageFileCache", dir);
                     _files.AddDirectory(dir);

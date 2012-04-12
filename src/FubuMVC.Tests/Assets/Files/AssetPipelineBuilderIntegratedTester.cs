@@ -28,7 +28,7 @@ namespace FubuMVC.Tests.Assets.Files
 
 
             thePipeline = new AssetPipeline();
-            theBuilder = new AssetPipelineBuilder(new FileSystem(), thePipeline, new PackageLog());
+            theBuilder = new AssetPipelineBuilder(new FileSystem(), thePipeline, new BottleLog());
             theBuilder.LoadFiles(new PackageAssetDirectory(){
                 Directory = AppDirectory,
                 PackageName = AssetPipeline.Application

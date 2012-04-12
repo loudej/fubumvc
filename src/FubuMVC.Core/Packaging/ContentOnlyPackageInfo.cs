@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Bottles;
-using Bottles.PackageLoaders.Assemblies;
+using Bottles.BottleLoaders.Assemblies;
 
 namespace FubuMVC.Core.Packaging
 {
-    public class ContentOnlyPackageInfo : IPackageInfo
+    public class ContentOnlyPackageInfo : IBottleInfo
     {
         private readonly string _directory;
         private readonly string _name;
@@ -25,7 +25,7 @@ namespace FubuMVC.Core.Packaging
 
         public void ForFolder(string folderName, Action<string> onFound)
         {
-            if (folderName == BottleFiles.WebContentFolder)
+            if (folderName == CommonBottleFiles.WebContentFolder)
             {
                 onFound(_directory);
             }

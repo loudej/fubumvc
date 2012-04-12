@@ -16,7 +16,7 @@ namespace FubuMVC.Core.View.Model
             _attachers = attachers;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             _templates.AllTemplates().Each(t =>
             {                

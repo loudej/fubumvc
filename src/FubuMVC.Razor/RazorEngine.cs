@@ -29,7 +29,7 @@ namespace FubuMVC.Razor
 
         private ITemplateFinder<Template> _finder;
         private ITemplateComposer<IRazorTemplate> _composer;
-        private readonly IPackageLog _logger;
+        private readonly IBottleLog _logger;
         private readonly IList<ITemplateFinderConvention<Template>> _finderConventions = new List<ITemplateFinderConvention<Template>>();
         private readonly IList<ITemplateComposerConvention<IRazorTemplate>> _composerConventions = new List<ITemplateComposerConvention<IRazorTemplate>>();
 
@@ -164,11 +164,11 @@ namespace FubuMVC.Razor
             services.FillType<IViewModifier<IFubuRazorView>, FubuPartialRendering>();
         }
 
-        private IPackageLog getLogger()
+        private IBottleLog getLogger()
         {
-            return PackageRegistry.Diagnostics != null
-                ? PackageRegistry.Diagnostics.LogFor(this)
-                : new PackageLog();
+            return BottlesRegistry.Diagnostics != null
+                ? BottlesRegistry.Diagnostics.LogFor(this)
+                : new BottleLog();
         }
 
         public RazorEngineRegistry FindWith(ITemplateFinder<Template> finder)

@@ -14,7 +14,7 @@ namespace FubuMVC.Core.View.Model.Sharing
             set { _registrations.Add(value); }
         }
 
-        public void Apply(IPackageLog log, ISharingRegistration registration)
+        public void Apply(IBottleLog log, ISharingRegistration registration)
         {
             _registrations.Each(x => x(registration));
         }

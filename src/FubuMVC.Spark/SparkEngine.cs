@@ -32,7 +32,7 @@ namespace FubuMVC.Spark
 
         private ITemplateFinder<Template> _finder;
         private ITemplateComposer<ITemplate> _composer;
-        private readonly IPackageLog _logger;
+        private readonly IBottleLog _logger;
         private readonly IList<ITemplateFinderConvention<Template>> _finderConventions = new List<ITemplateFinderConvention<Template>>();
         private readonly IList<ITemplateComposerConvention<ITemplate>> _composerConventions = new List<ITemplateComposerConvention<ITemplate>>();
 
@@ -187,11 +187,11 @@ namespace FubuMVC.Spark
             services.SetServiceIfNone<IViewDefinitionResolver, ViewDefinitionResolver>();
         }
 
-        private IPackageLog getLogger()
+        private IBottleLog getLogger()
         {
-            return PackageRegistry.Diagnostics != null
-                ? PackageRegistry.Diagnostics.LogFor(this)
-                : new PackageLog();
+            return BottlesRegistry.Diagnostics != null
+                ? BottlesRegistry.Diagnostics.LogFor(this)
+                : new BottleLog();
         }
 
         public SparkEngine FindWith(ITemplateFinder<Template> finder)

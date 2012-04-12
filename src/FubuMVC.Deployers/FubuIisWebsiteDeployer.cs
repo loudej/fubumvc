@@ -18,7 +18,7 @@ namespace FubuMVC.Deployers
             _bottleMover = bottleMover;
         }
 
-        public void Execute(FubuWebsite website, HostManifest host, IPackageLog log)
+        public void Execute(FubuWebsite website, HostManifest host, IBottleLog log)
         {
             // TODO -- more logging!!!!
 

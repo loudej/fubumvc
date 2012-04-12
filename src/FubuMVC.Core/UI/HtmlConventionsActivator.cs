@@ -20,7 +20,7 @@ namespace FubuMVC.Core.UI
             _container = container;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             var library = new TagProfileLibrary();
 

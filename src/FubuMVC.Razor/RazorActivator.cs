@@ -20,7 +20,7 @@ namespace FubuMVC.Razor
 			_engine = engine;
 		}
 
-		public void Activate (IEnumerable<IPackageInfo> packages, IPackageLog log)
+		public void Activate (IEnumerable<IBottleInfo> packages, IBottleLog log)
 		{
             log.Trace("Running {0}".ToFormat(GetType().Name));
 			
@@ -28,7 +28,7 @@ namespace FubuMVC.Razor
             setEngineDependencies(log);
 		}
 
-        private void configureRazorSettings(IPackageLog log)
+        private void configureRazorSettings(IBottleLog log)
         {
             _engine.Namespaces.Add(typeof(VirtualPathUtility).Namespace); // System.Web
             _engine.Namespaces.Add(typeof(FubuRegistryExtensions).Namespace); // FubuMVC.Razor
@@ -40,7 +40,7 @@ namespace FubuMVC.Razor
             _engine.Namespaces.Each(x => log.Trace("  - {0}".ToFormat(x)));
         }
 
-	    private void setEngineDependencies(IPackageLog log)
+	    private void setEngineDependencies(IBottleLog log)
 	    {
 	        ((TemplateServiceConfiguration) _engine).BaseTemplateType = typeof (FubuRazorView);
         }

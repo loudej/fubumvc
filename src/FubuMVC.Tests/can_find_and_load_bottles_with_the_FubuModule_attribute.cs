@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Bottles;
-using Bottles.PackageLoaders.Assemblies;
+using Bottles.BottleLoaders.Assemblies;
 using FubuCore;
 using FubuMVC.Core;
 using NUnit.Framework;
@@ -29,12 +29,12 @@ namespace FubuMVC.Tests
 
             var assembly = typeof(AssemblyPackage.AssemblyPackageMarker).Assembly;
 
-            PackageRegistry.PackageAssemblies.ShouldContain(assembly);
+            BottlesRegistry.PackageAssemblies.ShouldContain(assembly);
 
-            PackageRegistry.Packages.Each(x => Debug.WriteLine(x.Name));
+            BottlesRegistry.Bottles.Each(x => Debug.WriteLine(x.Name));
 
 
-            PackageRegistry.Packages.OfType<AssemblyPackageInfo>().Any(x => x.Name == AssemblyPackageInfo.CreateFor(assembly).Name)
+            BottlesRegistry.Bottles.OfType<AssemblyBottleInfo>().Any(x => x.Name == AssemblyBottleInfo.CreateFor(assembly).Name)
                 .ShouldBeTrue();
         }
     }

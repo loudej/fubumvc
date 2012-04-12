@@ -125,7 +125,7 @@ namespace FubuMVC.Core.Assets
         {
             var graph = new AssetGraph();
             configure(graph);
-            graph.CompileDependencies(new PackageLog());
+            graph.CompileDependencies(new BottleLog());
 
             return graph;
         }
@@ -156,7 +156,7 @@ namespace FubuMVC.Core.Assets
         }
 
 
-        public void CompileDependencies(IPackageLog log)
+        public void CompileDependencies(IBottleLog log)
         {
             _sets.Each(set => set.FindScripts(this));
             _rules.Each(rule =>

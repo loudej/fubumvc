@@ -60,7 +60,7 @@ namespace FubuMVC.Core
     public class FubuApplication : IContainerFacilityExpression
     {
         private readonly Lazy<IContainerFacility> _facility;
-        private readonly List<Action<IPackageFacility>> _packagingDirectives = new List<Action<IPackageFacility>>();
+        private readonly List<Action<IBottleFacility>> _packagingDirectives = new List<Action<IBottleFacility>>();
         private readonly Lazy<FubuRegistry> _registry;
         private readonly List<Action<FubuRegistry>> _registryModifications = new List<Action<FubuRegistry>>();
         private Func<IContainerFacility> _facilitySource;
@@ -131,11 +131,11 @@ namespace FubuMVC.Core
 
             // TODO -- I think Bottles probably needs to enforce a "tell me the paths"
             // step maybe
-            PackageRegistry.GetApplicationDirectory = FubuMvcPackageFacility.GetApplicationPath;
-            BottleFiles.ContentFolder = FubuMvcPackageFacility.FubuContentFolder;
-            BottleFiles.PackagesFolder = FileSystem.Combine("bin", FubuMvcPackageFacility.FubuPackagesFolder);
+            BottlesRegistry.GetApplicationDirectory = FubuMvcPackageFacility.GetApplicationPath;
+            CommonBottleFiles.ContentFolder = FubuMvcPackageFacility.FubuContentFolder;
+            CommonBottleFiles.PackagesFolder = FileSystem.Combine("bin", FubuMvcPackageFacility.FubuPackagesFolder);
 
-            PackageRegistry.LoadPackages(x =>
+            BottlesRegistry.LoadBottles(x =>
             {
                 x.Facility(_fubuFacility);
                 _packagingDirectives.Each(d => d(x));
@@ -161,7 +161,7 @@ namespace FubuMVC.Core
                 });
             });
 
-            PackageRegistry.AssertNoFailures();
+            BottlesRegistry.AssertNoFailures();
 
             var routes = buildRoutes(factory, graph);
             routes.Each(r => RouteTable.Routes.Add(r));
@@ -204,7 +204,7 @@ namespace FubuMVC.Core
             return routes;
         }
 
-        private void applyFubuExtensionsFromPackages(IPackageLog log)
+        private void applyFubuExtensionsFromPackages(IBottleLog log)
         {
             FubuExtensionFinder.FindAllExtensions().Each(x1 =>
             {
@@ -213,7 +213,7 @@ namespace FubuMVC.Core
             });
         }
 
-        public FubuApplication Packages(Action<IPackageFacility> configure)
+        public FubuApplication Packages(Action<IBottleFacility> configure)
         {
             _packagingDirectives.Add(configure);
             return this;

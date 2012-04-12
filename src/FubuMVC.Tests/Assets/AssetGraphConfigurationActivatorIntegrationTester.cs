@@ -25,14 +25,14 @@ namespace FubuMVC.Tests.Assets
             assets = new AssetGraph();
             activator = new AssetGraphConfigurationActivator(assets, new FileSystem(), new AssetLogsCache());
 
-            log = new PackageLog();
+            log = new BottleLog();
         }
 
         #endregion
 
         private AssetGraph assets;
         private AssetGraphConfigurationActivator activator;
-        private PackageLog log;
+        private BottleLog log;
 
         [Test]
         public void read_a_directory()

@@ -78,7 +78,7 @@ namespace FubuMVC.Tests.Assets.Files
         public void logged_that_no_content_was_scanned()
         {
             var theMessage = AssetPipelineBuilder.NoContentFoundForPackageAt.ToFormat(thePackageDirectory.Directory);
-            MockFor<IPackageLog>().AssertWasCalled(x => x.Trace(theMessage));
+            MockFor<IBottleLog>().AssertWasCalled(x => x.Trace(theMessage));
         }
     }
 
@@ -110,7 +110,7 @@ namespace FubuMVC.Tests.Assets.Files
         public void should_log_where_the_content_is_being_scanned_from()
         {
             var theMessage = AssetPipelineBuilder.LoadingContentForPackageAt.ToFormat(theContentFolder);
-            MockFor<IPackageLog>().AssertWasCalled(x => x.Trace(theMessage));
+            MockFor<IBottleLog>().AssertWasCalled(x => x.Trace(theMessage));
         }
 
         [Test]

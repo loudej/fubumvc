@@ -31,7 +31,7 @@ namespace FubuMVC.Razor.Tests
 
             Services.Inject(_config);
             Services.Inject<IFubuTemplateService>(templateService);
-            ClassUnderTest.Activate(Enumerable.Empty<IPackageInfo>(), MockFor<IPackageLog>());
+            ClassUnderTest.Activate(Enumerable.Empty<IBottleInfo>(), MockFor<IBottleLog>());
         }
 
         [Test]

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Reflection;
 using Bottles;
 using Bottles.Diagnostics;
-using Bottles.PackageLoaders.Assemblies;
+using Bottles.BottleLoaders.Assemblies;
 
 namespace FubuMVC.Core
 {
-    public class FubuModuleAttributePackageLoader : IPackageLoader
+    public class FubuModuleAttributePackageLoader : IBottleLoader
     {
-        public IEnumerable<IPackageInfo> Load(IPackageLog log)
+        public IEnumerable<IBottleInfo> Load(IBottleLog log)
         {
             var list = new List<string>{AppDomain.CurrentDomain.BaseDirectory};
 
@@ -29,7 +29,7 @@ namespace FubuMVC.Core
             return list.SelectMany(
                 x =>
                 AssembliesFromPath(x, assem => assem.GetCustomAttributes(typeof (FubuModuleAttribute), false).Any()))
-                .Select(AssemblyPackageInfo.CreateFor);
+                .Select(AssemblyBottleInfo.CreateFor);
         }
 
         // TODO -- this is so common here and in FubuMVC, just get something into FubuCore

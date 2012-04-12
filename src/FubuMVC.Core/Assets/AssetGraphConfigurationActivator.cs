@@ -31,17 +31,17 @@ namespace FubuMVC.Core.Assets
             _diagnostics = new AssetRegistrationDiagnostics(_assets, logs);
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             _configurationFiles.Clear();
 
             ReadScriptConfig(FubuMvcPackageFacility.GetApplicationPath(), log);
-            packages.Each(p => p.ForFolder(BottleFiles.WebContentFolder, folder => ReadScriptConfig(folder, log)));
+            packages.Each(p => p.ForFolder(CommonBottleFiles.WebContentFolder, folder => ReadScriptConfig(folder, log)));
 
             _assets.CompileDependencies(log);
         }
 
-        public void ReadScriptConfig(string folder, IPackageLog log)
+        public void ReadScriptConfig(string folder, IBottleLog log)
         {
             log.Trace("Trying to read *script.config / *asset.config files from {0}", folder);
             var files = _fileSystem.FindFiles(folder, new FileSet
@@ -59,7 +59,7 @@ namespace FubuMVC.Core.Assets
             files.Each(file => ReadFile(file, log));
         }
 
-        public void ReadFile(string file, IPackageLog log)
+        public void ReadFile(string file, IBottleLog log)
         {
 
             _diagnostics.SetCurrentProvenance(file);

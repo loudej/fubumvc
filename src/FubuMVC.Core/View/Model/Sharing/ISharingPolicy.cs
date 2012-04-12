@@ -4,6 +4,6 @@ namespace FubuMVC.Core.View.Model.Sharing
 {
     public interface ISharingPolicy
     {
-        void Apply(IPackageLog log, ISharingRegistration registration);
+        void Apply(IBottleLog log, ISharingRegistration registration);
     }
 }

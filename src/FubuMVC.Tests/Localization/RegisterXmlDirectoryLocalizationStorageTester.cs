@@ -19,12 +19,12 @@ namespace FubuMVC.Tests.Localization
     [TestFixture]
     public class RegisterXmlDirectoryLocalizationStorageTester : InteractionContext<RegisterXmlDirectoryLocalizationStorage>
     {
-        private IPackageInfo[] thePackages;
+        private IBottleInfo[] thePackages;
         private StubContainerFacility theFacility;
 
         protected override void beforeEach()
         {
-            thePackages = new IPackageInfo[]{
+            thePackages = new IBottleInfo[]{
                 new ContentOnlyPackageInfo("dir1", "Dir1"),
                 new ContentOnlyPackageInfo("dir2", "Dir2"),
                 new ContentOnlyPackageInfo("dir3", "Dir3"),
@@ -36,7 +36,7 @@ namespace FubuMVC.Tests.Localization
             var spinup = Services.Container.GetInstance<SpinUpLocalizationCaches>();
             theFacility.Container.Inject(spinup);
 
-            ClassUnderTest.Activate(thePackages, new PackageLog());
+            ClassUnderTest.Activate(thePackages, new BottleLog());
         }
 
         [Test]

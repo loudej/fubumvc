@@ -7,7 +7,7 @@ using FubuMVC.Core.Packaging;
 
 namespace FubuMVC.Deployers
 {
-    public class FubuBottleDestination : WebsiteBottleDestination, IBottleDestination
+    public class FubuBottleDestination : WebsiteBottleDestination
     {
         private readonly string _physicalPath;
 
@@ -17,7 +17,7 @@ namespace FubuMVC.Deployers
         }
 
 
-        public override IEnumerable<BottleExplosionRequest> DetermineExplosionRequests(PackageManifest manifest)
+        public override IEnumerable<BottleExplosionRequest> DetermineExplosionRequests(BottleManifest manifest)
         {
             var baseRequests = base.DetermineExplosionRequests(manifest);
             switch (manifest.Role)
@@ -46,7 +46,7 @@ namespace FubuMVC.Deployers
                                  {
                                      BottleDirectory = null,
                                      BottleName = manifest.Name,
-                                     DestinationDirectory = _physicalPath.AppendPath(BottleFiles.BinaryFolder, FubuMvcPackageFacility.FubuPackagesFolder)
+                                     DestinationDirectory = _physicalPath.AppendPath(CommonBottleFiles.BinaryFolder, FubuMvcPackageFacility.FubuPackagesFolder)
                                  };
 
                     

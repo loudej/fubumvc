@@ -20,13 +20,13 @@ namespace FubuMVC.Core.View.Model.Sharing
             _diagnostics = new SharingRegistrationDiagnostics(_graph, logs);
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
-            packages.Each(p => p.ForFolder(BottleFiles.WebContentFolder, folder => ReadSparkConfig(p.Name, folder, log)));
+            packages.Each(p => p.ForFolder(CommonBottleFiles.WebContentFolder, folder => ReadSparkConfig(p.Name, folder, log)));
             ReadSparkConfig(TemplateConstants.HostOrigin, FubuMvcPackageFacility.GetApplicationPath(), log);
         }
 
-        public void ReadSparkConfig(string provenance, string folder, IPackageLog log)
+        public void ReadSparkConfig(string provenance, string folder, IBottleLog log)
         {
             log.Trace("Looking for *spark.config in {0}", folder);
             var configs = _fileSystem.FindFiles(folder, new FileSet
@@ -44,7 +44,7 @@ namespace FubuMVC.Core.View.Model.Sharing
             configs.Each(file => ReadFile(provenance, file, log));
         }
 
-        public void ReadFile(string provenance, string file, IPackageLog log)
+        public void ReadFile(string provenance, string file, IBottleLog log)
         {
             _diagnostics.SetCurrentProvenance(provenance);
             var reader = new SharingDslReader(_diagnostics);

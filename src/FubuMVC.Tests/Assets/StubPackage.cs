@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Bottles;
-using Bottles.PackageLoaders.Assemblies;
+using Bottles.BottleLoaders.Assemblies;
 using FubuCore.Util;
 
 namespace FubuMVC.Tests.Assets
 {
-    public class StubPackage : IPackageInfo
+    public class StubPackage : IBottleInfo
     {
         private readonly string _name;
         private readonly Cache<string, string> _folderNames = new Cache<string, string>();

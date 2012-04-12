@@ -13,7 +13,7 @@ namespace FubuMVC.Tests.Packaging
         public void zip_packages_should_store_content_in_WebContent_subfolder()
         {
             const string packageFolder = @"c:\packageFolder";
-            var webContentSubFolder = FileSystem.Combine(packageFolder, BottleFiles.WebContentFolder);
+            var webContentSubFolder = FileSystem.Combine(packageFolder, CommonBottleFiles.WebContentFolder);
             ZipFilePackageLoader.GetContentFolderForPackage(packageFolder).ShouldEqual(webContentSubFolder);
         }
     }

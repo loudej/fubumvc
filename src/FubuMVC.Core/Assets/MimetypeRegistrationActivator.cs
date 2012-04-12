@@ -16,7 +16,7 @@ namespace FubuMVC.Core.Assets
             _policies = policies;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IEnumerable<IBottleInfo> packages, IBottleLog log)
         {
             _policies.Each(p =>
             {

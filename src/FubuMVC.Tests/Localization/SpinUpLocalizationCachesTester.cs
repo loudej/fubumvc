@@ -14,12 +14,12 @@ namespace FubuMVC.Tests.Localization
     [TestFixture]
     public class SpinUpLocalizationCachesTester : InteractionContext<SpinUpLocalizationCaches>
     {
-        private List<IPackageInfo> thePackages;
+        private List<IBottleInfo> thePackages;
 
         protected override void beforeEach()
         {
-            thePackages = new List<IPackageInfo>();
-            ClassUnderTest.Activate(thePackages, MockFor<IPackageLog>());
+            thePackages = new List<IBottleInfo>();
+            ClassUnderTest.Activate(thePackages, MockFor<IBottleLog>());
         }
 
         [Test]
