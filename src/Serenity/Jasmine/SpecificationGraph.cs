@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bottles.Assemblies;
+using Bottles.PackageLoaders.Assemblies;
 using FubuCore;
 using FubuCore.Util;
 using FubuMVC.Core.Assets.Files;
