@@ -8,20 +8,20 @@ using FubuMVC.Core.Http;
 
 namespace FubuMVC.OwinHost
 {
-    public class OwinRequestData : RequestData
+    class OwinRequestData : RequestData
     {
         public static readonly string Querystring = "OwinQuerystring";
         public static readonly string FormPost = "OwinFormPost";
 
-        public OwinRequestData(RouteData routeData, OwinRequestBody body)
+        public OwinRequestData(RouteData routeData, Gate.Request req)
         {
             AddValues(new RouteDataValues(routeData));
 
-            AddValues(Querystring, new DictionaryKeyValues(body.Querystring()));
-            AddValues(FormPost, new DictionaryKeyValues(body.FormData ?? new Dictionary<string, string>()));
+            AddValues(Querystring, new DictionaryKeyValues(req.Query));
+            AddValues(FormPost, new DictionaryKeyValues(req.ReadForm() ?? new Dictionary<string, string>()));
 
-            AddValues(RequestDataSource.Header.ToString(), new DictionaryKeyValues(body.Headers()));
+            var headers = req.Headers.ToDictionary(kv => kv.Key, kv => string.Join(",", kv.Value));
+            AddValues(RequestDataSource.Header.ToString(), new DictionaryKeyValues(headers));
         }
-
     }
 }

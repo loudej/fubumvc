@@ -5,34 +5,32 @@ using FubuMVC.Core.Http;
 
 namespace FubuMVC.OwinHost
 {
-
-    public class OwinCurrentHttpRequest : ICurrentHttpRequest
+    class OwinCurrentHttpRequest : ICurrentHttpRequest
     {
+        private readonly Gate.Request _req;
         private readonly Lazy<string> _baseUrl;
-        private OwinRequestBody _body;
 
-        public OwinCurrentHttpRequest(OwinRequestBody body)
+        public OwinCurrentHttpRequest(Gate.Request req)
         {
-            _body = body;
+            _req = req;
 
-            // TODO -- Owin and protocol?
-            _baseUrl = new Lazy<string>(() => "http://" + _body.HostWithPort + "/" + _body.PathBase.TrimEnd('/'));
+            _baseUrl = new Lazy<string>(() => _req.Scheme + "://" + _req.HostWithPort + "/" + _req.PathBase.TrimEnd('/'));
         }
 
         public string RawUrl()
         {
-            return ToFullUrl(_body.Path);
+            return ToFullUrl(_req.Path);
         }
 
         public string RelativeUrl()
         {
-            return _body.Path;
+            return _req.Path;
         }
 
         public string FullUrl()
         {
-            var parts = _body.HostWithPort.Split(':');
-            var builder = new UriBuilder(_body.Environment.Scheme, parts[0]);
+            var parts = _req.HostWithPort.Split(':');
+            var builder = new UriBuilder(_req.Scheme, parts[0]);
             if (parts.Length > 1 && parts[1].Trim().IsNotEmpty())
             {
                 var port = 0;
@@ -41,8 +39,8 @@ namespace FubuMVC.OwinHost
                     builder.Port = port;
                 }
             }
-            builder.Path = _body.Path;
-            builder.Query = _body.Environment.QueryString;
+            builder.Path = _req.PathBase + _req.Path;
+            builder.Query = _req.QueryString;
             return builder.ToString();
         }
 
@@ -53,7 +51,7 @@ namespace FubuMVC.OwinHost
 
         public string HttpMethod()
         {
-            return _body.Method;
+            return _req.Method;
         }
     }
 }

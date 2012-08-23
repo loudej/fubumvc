@@ -4,20 +4,23 @@ using FubuMVC.Core.Http;
 
 namespace FubuMVC.OwinHost
 {
-    public class OwinStreamingData : IStreamingData
+    class OwinStreamingData : IStreamingData
     {
-        private readonly MemoryStream _stream;
+        private readonly Stream _stream;
 
-        public OwinStreamingData(OwinRequestBody request)
+        public OwinStreamingData(Gate.Request req)
         {
-            _stream = request.Stream ?? new MemoryStream();
+            _stream = req.Body;
         }
 
         public Stream Input
         {
             get
             {
-                _stream.Position = 0;
+                if (_stream.CanSeek)
+                {
+                    _stream.Seek(0, SeekOrigin.Begin);
+                }
                 return _stream;
             }
         }
