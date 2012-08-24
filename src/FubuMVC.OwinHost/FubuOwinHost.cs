@@ -4,35 +4,50 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Routing;
 using FubuCore;
+using FubuMVC.Core;
 using FubuMVC.Core.Runtime;
 using Gate;
 
 namespace FubuMVC.OwinHost
 {
+    using AppFunc = Func<IDictionary<string, object>, Task>;
+
     public class FubuOwinHost
     {
+        private readonly AppFunc _app;
+        private readonly FubuRuntime _runtime;
+
+        public FubuOwinHost(AppFunc app, FubuRuntime runtime)
+        {
+            _app = app;
+            _runtime = runtime;
+        }
+
+        public static AppFunc Middleware(AppFunc app, FubuRuntime runtime)
+        {
+            return new FubuOwinHost(app, runtime).Invoke;
+        }
+
+        public static AppFunc Middleware(AppFunc app, FubuRuntime runtime, bool verbose)
+        {
+            return new FubuOwinHost(app, runtime) { Verbose = verbose }.Invoke;
+        }
+
         public bool Verbose { get; set; }
 
         public Task Invoke(IDictionary<string, object> env)
         {
             var req = new Request(env);
-            var res = new Response(env);
-
-
-
-            if (Verbose) Console.WriteLine("Received {0} - {1}", req.Method, req.Path);
-
-            Task task;
             var routeData = determineRouteData(req);
             if (routeData == null)
             {
-                write404(res);
-                task = TaskHelpers.Completed();
+                return _app(env);
             }
-            else
-            {
-                task = executeRoute(routeData, req, res);
-            }
+
+            if (Verbose) Console.WriteLine("Received {0} - {1}", req.Method, req.Path);
+
+            var res = new Response(env);
+            var task = executeRoute(routeData, req, res);
 
             if (Verbose)
             {
@@ -76,7 +91,15 @@ namespace FubuMVC.OwinHost
         private RouteData determineRouteData(Gate.Request req)
         {
             var context = new GateHttpContext(req.Path, req.Method);
-            return RouteTable.Routes.GetRouteData(context);
+            foreach (var route in _runtime.Routes)
+            {
+                var routeData = route.GetRouteData(context);
+                if (routeData != null)
+                {
+                    return routeData;
+                }
+            }
+            return null;
         }
 
         private static void write404(Gate.Response res)

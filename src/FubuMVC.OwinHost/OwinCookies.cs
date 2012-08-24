@@ -24,13 +24,7 @@ namespace FubuMVC.OwinHost
                 });
 
             _responseCookies = new Lazy<HttpCookieCollection>(
-                () =>
-                {
-                    var cookies = new HttpCookieCollection();
-                    // TODO: this collection doesn't fire "add/modify" events - 
-                    // how should it inform the response before the output starts writing?
-                    return cookies;
-                });
+                () => new HttpCookieCollection());
         }
 
         public HttpCookieCollection Request { get { return _requestCookies.Value; } }

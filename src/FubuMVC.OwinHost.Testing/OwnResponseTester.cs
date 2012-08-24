@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Gate;
 using NUnit.Framework;
 using FubuTestingSupport;
 
@@ -12,20 +13,21 @@ namespace FubuMVC.OwinHost.Testing
         [SetUp]
         protected void beforeEach()
         {
-            response = new Response(null);
+            response = new Response(new Request().Environment);
         }
 
         [Test]
         public void should_render_response_status_only()
         {
-            response.SetStatus(HttpStatusCode.InternalServerError);
-            response.Status.ShouldEqual("500");
+            response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            response.Status.ShouldEqual("500 Internal Server Error");
         }
 
         [Test]
         public void should_render_response_status_and_description()
         {
-            response.SetStatus(HttpStatusCode.NotAcceptable, "your mom goes to college");
+            response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+            response.ReasonPhrase = "your mom goes to college";
             response.Status.ShouldEqual("406 your mom goes to college");
         }
     }

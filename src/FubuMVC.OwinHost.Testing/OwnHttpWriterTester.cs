@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using FubuCore;
+using Gate;
 using NUnit.Framework;
 using FubuTestingSupport;
 
@@ -14,8 +15,8 @@ namespace FubuMVC.OwinHost.Testing
         [SetUp]
         protected void beforeEach()
         {
-            response = new Response(null);
-            writer = new OwinHttpWriter(response);
+            response = new Response(new Request().Environment);
+            writer = new OwinHttpWriter(response, cookie => { });
         }
 
         [Test]
@@ -23,7 +24,7 @@ namespace FubuMVC.OwinHost.Testing
         {
             writer.WriteResponseCode(HttpStatusCode.UseProxy);
 
-            response.Status.ShouldEqual("305");
+            response.Status.ShouldEqual("305 Use Proxy");
         }
 
         [Test]

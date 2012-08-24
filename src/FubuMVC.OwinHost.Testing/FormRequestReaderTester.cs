@@ -10,20 +10,28 @@ namespace FubuMVC.OwinHost.Testing
         [Test]
         public void can_parse_query_string_with_encoding()
         {
-            FormRequestReader.Parse("Anesth=Moore%2C+Roy")["Anesth"].ShouldEqual("Moore, Roy");
-            
+            new Gate.Request
+                {
+                    QueryString = "Anesth=Moore%2C+Roy"
+                }.Query["Anesth"].ShouldEqual("Moore, Roy");
         }
 
         [Test]
         public void can_parse_field_values_in_query_string()
         {
-            FormRequestReader.Parse("Moore%2C+Roy=Anesth")["Moore, Roy"].ShouldEqual("Anesth");
+            new Gate.Request
+            {
+                QueryString = "Moore%2C+Roy=Anesth"
+            }.Query["Moore, Roy"].ShouldEqual("Anesth");
         }
 
         [Test]
         public void can_parse_multiple_values()
         {
-            var dict = FormRequestReader.Parse("a=1&b=2&c=3");
+            var dict = new Gate.Request
+            {
+                QueryString = "a=1&b=2&c=3"
+            }.Query;
 
             dict["a"].ShouldEqual("1");
             dict["b"].ShouldEqual("2");

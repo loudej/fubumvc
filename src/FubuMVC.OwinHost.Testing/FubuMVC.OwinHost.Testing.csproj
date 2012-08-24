@@ -37,9 +37,6 @@
     <Reference Include="FubuTestingSupport">
       <HintPath>..\packages\FubuTestingSupport.0.9.9.174\lib\FubuTestingSupport.dll</HintPath>
     </Reference>
-    <Reference Include="Gate">
-      <HintPath>..\packages\Gate.0.1.4\lib\Gate.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
     </Reference>
