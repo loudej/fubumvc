@@ -18,7 +18,24 @@ namespace FubuMVC.OwinHost
         private IList<RouteBase> _routes;
 
         public bool Verbose { get; set; }
- 
+
+        public FubuOwinHost(AppFunc app, IApplicationSource applicationSource)
+        {
+            _app = app;
+            _routes = applicationSource.BuildApplication().Bootstrap().Routes;
+        }
+        
+        public FubuOwinHost(AppFunc app, FubuApplication fubuApplication)
+        {
+            _app = app;
+            _routes = fubuApplication.Bootstrap().Routes;
+        }
+
+        public FubuOwinHost(AppFunc app, FubuRuntime fubuRuntime)
+        {
+            _app = app;
+            _routes = fubuRuntime.Routes;
+        }
 
         public FubuOwinHost(AppFunc app, IList<RouteBase> routes)
         {
@@ -26,25 +43,6 @@ namespace FubuMVC.OwinHost
             _routes = routes;
         }
 
-        public static AppFunc Middleware(AppFunc app, IApplicationSource applicationSource)
-        {
-            return Middleware(app, applicationSource.BuildApplication());
-        }
-
-        public static AppFunc Middleware(AppFunc app, FubuApplication fubuApplication)
-        {
-            return Middleware(app, fubuApplication.Bootstrap());
-        }
-
-        public static AppFunc Middleware(AppFunc app, FubuRuntime fubuRuntime)
-        {
-            return Middleware(app, fubuRuntime.Routes);
-        }
-
-        public static AppFunc Middleware(AppFunc app, IList<RouteBase> routes)
-        {
-            return new FubuOwinHost(app, routes).Invoke;
-        }
 
         public Task Invoke(IDictionary<string, object> env)
         {
