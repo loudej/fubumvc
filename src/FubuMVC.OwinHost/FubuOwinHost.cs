@@ -6,7 +6,27 @@ using System.Web.Routing;
 using FubuCore;
 using FubuMVC.Core;
 using FubuMVC.Core.Runtime;
+using FubuMVC.OwinHost;
 using Gate;
+
+namespace Owin
+{
+    public static class FubuExtensions
+    {
+        public static IAppBuilder UseFubu(this IAppBuilder builder, IApplicationSource applicationSource)
+        {
+            return builder.UseType<FubuOwinHost>(applicationSource);
+        }
+        public static IAppBuilder UseFubu(this IAppBuilder builder, FubuApplication application)
+        {
+            return builder.UseType<FubuOwinHost>(application);
+        }
+        public static IAppBuilder UseFubu(this IAppBuilder builder, FubuRuntime runtime)
+        {
+            return builder.UseType<FubuOwinHost>(runtime);
+        }
+    }
+}
 
 namespace FubuMVC.OwinHost
 {
@@ -77,7 +97,6 @@ namespace FubuMVC.OwinHost
             var exceptionHandlingObserver = new ExceptionHandlingObserver();
             arguments.Set(typeof(IExceptionHandlingObserver), exceptionHandlingObserver);
 
-            invoker.Invoke(arguments, routeData.Values);
             var task = Task.Factory.StartNew(() => invoker.Invoke(arguments, routeData.Values));
 
             return task.ContinueWith(x =>
