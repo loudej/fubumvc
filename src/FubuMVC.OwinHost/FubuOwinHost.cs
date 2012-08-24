@@ -15,25 +15,36 @@ namespace FubuMVC.OwinHost
     public class FubuOwinHost
     {
         private readonly AppFunc _app;
-        private readonly FubuRuntime _runtime;
-
-        public FubuOwinHost(AppFunc app, FubuRuntime runtime)
-        {
-            _app = app;
-            _runtime = runtime;
-        }
-
-        public static AppFunc Middleware(AppFunc app, FubuRuntime runtime)
-        {
-            return new FubuOwinHost(app, runtime).Invoke;
-        }
-
-        public static AppFunc Middleware(AppFunc app, FubuRuntime runtime, bool verbose)
-        {
-            return new FubuOwinHost(app, runtime) { Verbose = verbose }.Invoke;
-        }
+        private IList<RouteBase> _routes;
 
         public bool Verbose { get; set; }
+ 
+
+        public FubuOwinHost(AppFunc app, IList<RouteBase> routes)
+        {
+            _app = app;
+            _routes = routes;
+        }
+
+        public static AppFunc Middleware(AppFunc app, IApplicationSource applicationSource)
+        {
+            return Middleware(app, applicationSource.BuildApplication());
+        }
+
+        public static AppFunc Middleware(AppFunc app, FubuApplication fubuApplication)
+        {
+            return Middleware(app, fubuApplication.Bootstrap());
+        }
+
+        public static AppFunc Middleware(AppFunc app, FubuRuntime fubuRuntime)
+        {
+            return Middleware(app, fubuRuntime.Routes);
+        }
+
+        public static AppFunc Middleware(AppFunc app, IList<RouteBase> routes)
+        {
+            return new FubuOwinHost(app, routes).Invoke;
+        }
 
         public Task Invoke(IDictionary<string, object> env)
         {
@@ -44,7 +55,10 @@ namespace FubuMVC.OwinHost
                 return _app(env);
             }
 
-            if (Verbose) Console.WriteLine("Received {0} - {1}", req.Method, req.Path);
+            if (Verbose)
+            {
+                Console.WriteLine("Received {0} - {1}", req.Method, req.Path);
+            }
 
             var res = new Response(env);
             var task = executeRoute(routeData, req, res);
@@ -91,7 +105,7 @@ namespace FubuMVC.OwinHost
         private RouteData determineRouteData(Gate.Request req)
         {
             var context = new GateHttpContext(req.Path, req.Method);
-            foreach (var route in _runtime.Routes)
+            foreach (var route in _routes)
             {
                 var routeData = route.GetRouteData(context);
                 if (routeData != null)
