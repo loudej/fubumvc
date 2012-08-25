@@ -14,10 +14,10 @@ namespace FubuMVC.OwinHost
 
         public bool IsClientConnected()
         {
-            dynamic callCompleted;
-            if (_res.Environment.TryGetValue("owin.CallCompleted", out callCompleted))
+            dynamic clientConnected;
+            if (_res.Environment.TryGetValue("server.ClientConnected", out clientConnected))
             {
-                return callCompleted.IsCompleted;
+                return clientConnected.IsConnected;
             }
             return true;
         }
